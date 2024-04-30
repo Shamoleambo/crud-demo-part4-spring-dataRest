@@ -1,45 +1,50 @@
 package com.tidcode.cruddemopart2.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.tidcode.cruddemopart2.dao.EmployeeDAO;
+import com.tidcode.cruddemopart2.dao.EmployeeRepository;
 import com.tidcode.cruddemopart2.entity.Employee;
-
-import jakarta.transaction.Transactional;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-	private EmployeeDAO employeeDAO;
+	private EmployeeRepository employeeRepository;
 
 	@Autowired
-	public EmployeeServiceImpl(@Qualifier("employeeDAOJpaImpl") EmployeeDAO employeeDAO) {
-		this.employeeDAO = employeeDAO;
+	public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
+		this.employeeRepository = employeeRepository;
 	}
 
 	@Override
 	public List<Employee> findAll() {
-		return this.employeeDAO.findAll();
+		return this.employeeRepository.findAll();
 	}
 
 	@Override
 	public Employee findById(int id) {
-		return this.employeeDAO.findById(id);
+		Optional<Employee> result = this.employeeRepository.findById(id);
+
+		Employee employee = null;
+		if (result.isPresent()) {
+			employee = result.get();
+		} else {
+			throw new RuntimeException("Did not find employee id - " + id);
+		}
+
+		return employee;
 	}
 
 	@Override
-	@Transactional
 	public Employee save(Employee employee) {
-		return this.employeeDAO.save(employee);
+		return this.employeeRepository.save(employee);
 	}
 
 	@Override
-	@Transactional
 	public void deleteById(int id) {
-		this.employeeDAO.deleteById(id);
+		this.employeeRepository.deleteById(id);
 	}
 }
