@@ -10,9 +10,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.tidcode</groupId>
-	<artifactId>cruddemo-part2</artifactId>
+	<artifactId>cruddemo-part3</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>cruddemo-part2</name>
+	<name>cruddemo-part3</name>
 	<description>REST CRUD Demo</description>
 	<properties>
 		<java.version>17</java.version>
