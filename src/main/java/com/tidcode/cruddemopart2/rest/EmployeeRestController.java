@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,11 +49,21 @@ public class EmployeeRestController {
 		Employee dbEmployee = this.employeeService.save(employee);
 		return dbEmployee;
 	}
-	
+
 	@PutMapping("/employees")
 	public Employee updateEmployee(@RequestBody Employee employee) {
 		Employee dbEmployee = this.employeeService.save(employee);
 		return dbEmployee;
+	}
+
+	@DeleteMapping("/employees/{employeeId}")
+	public String deleteEmployee(@PathVariable int employeeId) {
+		Employee employee = this.employeeService.findById(employeeId);
+		if (employee == null) {
+			throw new RuntimeException("Employee id not found - " + employeeId);
+		}
+		this.employeeService.deleteById(employeeId);
+		return "Delete employee id - " + employeeId;
 	}
 
 }
