@@ -10,14 +10,18 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.tidcode</groupId>
-	<artifactId>cruddemo-part3</artifactId>
+	<artifactId>cruddemo-part4</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>cruddemo-part3</name>
+	<name>cruddemo-part4</name>
 	<description>REST CRUD Demo</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-rest</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
