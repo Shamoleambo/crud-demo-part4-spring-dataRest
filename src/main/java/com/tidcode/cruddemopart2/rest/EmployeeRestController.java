@@ -8,23 +8,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tidcode.cruddemopart2.dao.EmployeeDAO;
 import com.tidcode.cruddemopart2.entity.Employee;
+import com.tidcode.cruddemopart2.service.EmployeeService;
 
 @RestController
 @RequestMapping("/api")
 public class EmployeeRestController {
 
-	private EmployeeDAO employeeDAO;
+	private EmployeeService employeeService;
 
 	@Autowired
-	public EmployeeRestController(@Qualifier("employeeDAOJpaImpl") EmployeeDAO employeeDAO) {
-		this.employeeDAO = employeeDAO;
+	public EmployeeRestController(@Qualifier("employeeServiceImpl") EmployeeService employeeService) {
+		this.employeeService = employeeService;
 	}
 
 	@GetMapping("/employees")
 	public List<Employee> findAll() {
-		return this.employeeDAO.findAll();
+		return this.employeeService.findAll();
 	}
 
 }
